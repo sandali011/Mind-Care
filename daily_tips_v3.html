@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Mindcare Tips & Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- General Styling (Combined from create.html and breathing.html) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+            --error: #e63946;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 15px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1100px;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- Illustration/Sidebar Styling --- */
+        .illustration {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            color: white;
+            text-align: center;
+        }
+
+        .illustration h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .illustration p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .illustration-img {
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+        }
+        
+        /* --- Content Area Styling --- */
+        .tip-content-area {
+            flex: 2;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 24px;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .subtitle {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        /* --- Tip Card Styling --- */
+        .tip-card {
+            background-color: var(--light-gray);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .tip-card h2 {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .tip-card p {
+            font-size: 16px;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .tip-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .tip-footer button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .tip-footer button i {
+            margin-right: 5px;
+        }
+
+        .tip-footer button:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .tip-date {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* --- Add Tip Form Styling (Reusing create.html form styles) --- */
+        .add-tip-section {
+            margin-bottom: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .add-tip-section h3 {
+            font-size: 20px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* --- Video Section --- */
+        .video-section {
+            margin-bottom: 30px;
+        }
+
+        .video-section h3 {
+            font-size: 20px;
+            color: var(--dark);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 5px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- Button Styling --- */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+                max-width: 600px;
+            }
+            
+            .illustration {
+                padding: 30px 20px;
+            }
+            
+            .tip-content-area {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tip-content-area {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="illustration">
+            <h2>Mindfulness Journey</h2>
+            <p>Explore today's tip, or contribute your own insight to help the community grow.</p>
+            <div class="illustration-img">
+                <!-- SVG Illustration (Reused/Modified) -->
+                <svg viewBox="0 0 446.67 662" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#fff" d="M223.33,0C100.08,0,0,100.08,0,223.33s100.08,223.33,223.33,223.33s223.33-100.08,223.33-223.33S346.59,0,223.33,0z"/>
+                    <circle cx="223.33" cy="223.33" r="178.67" fill="#4cc9f0" opacity="0.2"/>
+                    <path fill="#4361ee" d="M223.33,82.67c-77.76,0-140.67,62.91-140.67,140.67s62.91,140.67,140.67,140.67s140.67-62.91,140.67-140.67S301.09,82.67,223.33,82.67z"/>
+                    <circle cx="223.33" cy="223.33" r="89.33" fill="#fff"/>
+                    <!-- Icon for Mindcare/Tip: A brain or a leaf/heart -->
+                    <path fill="#3f37c9" d="M223.33,133.33c-36.82,0-66.67,29.85-66.67,66.67c0,16.67,6.11,32.06,16.48,43.89c-10.37,11.83-16.48,27.22-16.48,43.89c0,36.82,29.85,66.67,66.67,66.67s66.67-29.85,66.67-66.67c0-16.67-6.11-32.06-16.48-43.89C283.89,165.39,290,149.99,290,133.33C290,96.51,260.15,66.67,223.33,66.67z"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="tip-content-area">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>Mind Care</span>
+            </div>
+            <h1>Daily Mindcare Tip</h1>
+            <p class="subtitle">Your personalized insight and resources for a better day.</p>
+            
+            <!-- Main Daily Tip Card -->
+            <div class="tip-card" id="dailyTipCard">
+                <h2 id="tipTitle"></h2>
+                <p id="tipContent"></p>
+                <div class="tip-footer">
+                    <span class="tip-date">Date: <span id="tipDate"></span></span>
+                    <button onclick="loadRandomTip()">
+                        <i class="fas fa-redo-alt"></i> Get Another Tip
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add New Tip Form Section -->
+            <div class="add-tip-section">
+                <h3>Contribute a New Tip</h3>
+                <form id="addTipForm">
+                    <div class="form-group">
+                        <label for="newTipTitle">Tip Title</label>
+                        <input type="text" id="newTipTitle" class="form-control" placeholder="e.g., Practice Mindful Breathing" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newTipContent">Tip Content</label>
+                        <textarea id="newTipContent" class="form-control" placeholder="Provide a detailed, helpful tip here." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="newTipVideoId">Related Video ID (YouTube)</label>
+                        <input type="text" id="newTipVideoId" class="form-control" placeholder="e.g., inp_f_g302s (Optional)">
+                    </div>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-plus-circle"></i> Add Tip to List
+                    </button>
+                </form>
+            </div>
+
+            <!-- Video Section -->
+            <div class="video-section">
+                <h3>Learn More: Video Resource</h3>
+                <div class="video-container">
+                    <!-- YouTube Embed Placeholder. Replace with actual video ID -->
+                    <iframe id="tipVideo" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <button class="btn" onclick="goToDashboard()">
+                Go to Dashboard
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Data Structure (Simulated Backend) ---
+        let TIPS_DATA = [
+            {
+                title: "Practice Mindful Breathing",
+                content: "Take five minutes right now to focus only on your breath. Inhale deeply through your nose, hold for a moment, and exhale slowly through your mouth. This simple exercise can significantly reduce stress and improve focus.",
+                video_id: "inp_f_g302s" // Example YouTube ID for a breathing exercise
+            },
+            {
+                title: "The Power of Gratitude",
+                content: "Practice gratitude. Write down three things you are genuinely thankful for today. This shifts your focus from what you lack to what you have, improving overall mood.",
+                video_id: "o_g-Q96-k9k" // Example YouTube ID for a gratitude video
+            },
+            {
+                title: "Digital Detox for Better Sleep",
+                content: "Limit screen time, especially before bed. The blue light from devices can interfere with your sleep cycle, which is crucial for mental health and emotional regulation.",
+                video_id: "s_h1qf7l470" // Example YouTube ID for a sleep hygiene video
+            },
+            {
+                title: "Connect with Nature",
+                content: "Spend at least 15 minutes outdoors today. Studies show that exposure to nature reduces stress hormones and improves overall well-being. Even looking at a tree from a window helps.",
+                video_id: "0Q_p_1-08-E" // Example YouTube ID for nature connection
+            }
+        ];
+
+        let currentTipIndex = -1;
+
+        // --- Core Functions ---
+
+        function getDailyTipIndex() {
+            // Use the day of the year to select a consistent tip for the day
+            const startOfYear = new Date(new Date().getFullYear(), 0, 0);
+            const diff = new Date() - startOfYear;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            
+            // Cycle through the tips based on the day of the year
+            return dayOfYear % TIPS_DATA.length;
+        }
+
+        function loadTip(index) {
+            if (TIPS_DATA.length === 0) {
+                document.getElementById('tipTitle').textContent = "No Tips Available";
+                document.getElementById('tipContent').textContent = "Please add a new tip using the form below.";
+                document.getElementById('tipDate').textContent = new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                document.getElementById('tipVideo').src = "";
+                return;
+            }
+
+            const tip = TIPS_DATA[index];
+            currentTipIndex = index;
+
+            // 1. Update Main Tip Card
+            document.getElementById('tipTitle').textContent = tip.title;
+            document.getElementById('tipContent').textContent = tip.content;
+            document.getElementById('tipDate').textContent = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // 2. Update Video Embed
+            const videoUrl = tip.video_id ? `https://www.youtube.com/embed/${tip.video_id}?rel=0` : '';
+            document.getElementById('tipVideo').src = videoUrl;
+        }
+
+        function loadRandomTip() {
+            if (TIPS_DATA.length <= 1) {
+                alert("Only one tip available. Add more tips to enable cycling.");
+                return;
+            }
+
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * TIPS_DATA.length);
+            } while (newIndex === currentTipIndex); // Ensure it's a different tip
+            
+            loadTip(newIndex);
+        }
+
+        function goToDashboard() {
+            alert("Navigating to Dashboard...");
+            // window.location.href = '/dashboard';
+        }
+
+        // --- New Feature: Add Tip Logic ---
+        document.getElementById('addTipForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('newTipTitle').value.trim();
+            const content = document.getElementById('newTipContent').value.trim();
+            const videoId = document.getElementById('newTipVideoId').value.trim();
+
+            if (!title || !content) {
+                alert("Please provide both a title and content for the new tip.");
+                return;
+            }
+
+            const newTip = {
+                title: title,
+                content: content,
+                video_id: videoId
+            };
+
+            // Simulate saving to the backend by pushing to the array
+            TIPS_DATA.push(newTip);
+
+            // Clear the form
+            document.getElementById('addTipForm').reset();
+
+            alert(`New Tip Added! Total tips: ${TIPS_DATA.length}.`);
+
+            // Optionally load the newly added tip
+            loadTip(TIPS_DATA.length - 1);
+        });
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load the tip corresponding to the current day on page load
+            const dailyIndex = getDailyTipIndex();
+            loadTip(dailyIndex);
+        });
+    </script>
+</body>
+</html>
